@@ -1,0 +1,32 @@
+.slideshow-container {
+    max-width: 600px;
+    position: relative;
+    margin: auto;
+  }
+  
+  .mySlides {
+    display: none;
+  }
+  
+  .mySlides img {
+    width: 100%; /* Make images fill their container */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
+  .prev, .next {
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    font-size: 20px;
+    color: white;
+    background-color: black;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .prev:hover, .next:hover {
+    background-color: #333;
+  }
+  
