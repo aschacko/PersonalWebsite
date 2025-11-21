@@ -1,44 +1,147 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Ashok Chacko's Personal Website</title>
-    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Press Start 2P'>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashok Chacko • Portfolio</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="Images/chackoLogo2.png" type="image/x-icon">
-  </head>
+    <link rel="icon" type="image/png" href="Media/Images/Main/chackoLogo.png">
+    <link rel="apple-touch-icon" href="Media/Images/Main/chackoLogo.png">
+<link rel="icon" sizes="192x192" href="Media/Images/Main/chackoLogo.png">
+</head>
 
 <body>
-  <!-- Top bar stays above everything -->
-  <div class="top-bar">
-    Hi! I am Ashok Chacko. I'm 17 years old and a rising senior at Saint Ignatius College Prep in Chicago
-  </div>
 
-  <!-- Header area with nav and background image -->
-  <header class="header-area">
-    <nav class="navigation">
-      <div class="logo">Ashok Chacko</div>
-      <div class="tagline">"Create what you wish existed"</div>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="portfolio.html">Programs</a></li>
-        <li><a href="Breadboard.html">Circuits</a></li>
-        <li><a href="transcript.html">Transcript</a></li>
-        <li><a href="sports.html">Sports</a></li>
-        <li><a href="resume.html">Resume</a></li>
-      </ul>
-    </nav>
-  </header>
-
-    <div class="footerstuff">
-      <div class="social-buttons">
-        <a href="mailto:aschacko32@gmail.com" class="social-button" target="_blank"><img src="Images/gmail.webp" alt="Gmail"></a>
-        <a href="https://www.instagram.com/ashok_chacko_/" class="social-button" target="_blank"><img src="Images/IG.png" alt="Instagram"></a>
-        <a href="https://www.youtube.com/@friendskochi6761/videos" class="social-button" target="_blank"><img src="Images/yt.png" alt="YouTube"></a>
-        <a href="https://github.com/aschacko" class="social-button" target="_blank"><img src="Images/github.png" alt="GitHub"></a>
-      </div>
-      <center><p>Contact me at my email aschacko32@gmail.com</p></center>
+    <!-- Top banner -->
+    <div class="top-intro">
+        <p>Hi, I'm Ashok Chacko - a builder, programmer, and student engineer from Chicago.</p>
     </div>
-  </body>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="title-block">
+            <h1>Ashok Chacko</h1>
+            <p class="subtitle typing-text">Engineering • Computer Science • Passion</p>
+         </div>
+
+        <nav class="main-nav">
+            <a href="index.html">Home</a>
+            <a href="portfolio.html">Projects</a>
+            <a href="transcript.html">Transcript</a>
+            <a href="resume.html">Resume</a>
+            <a href="sports.html">Sports</a>
+        </nav>
+    </header>
+
+    <!-- Intro section -->
+    <section class="about-section">
+    <div class="about-content">
+        <img src="Media/Images/Main/AshokPortrait.jpg" alt="Ashok Chacko Portrait" class="portrait">
+        <div class="about-text">
+            <h2>About My Work</h2>
+            <p>
+               I am a passionate, self-taught engineer. I build projects that I am enthusiastic about using free resources available to me. I’ve done everything from electrical engineering and programming to arts and crafts. I do what makes me happy. This site holds some of the things I’ve built so far and the things I’m learning along the way.
+            </p>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Projects Section -->
+    <section class="projects-section">
+        <h2>Featured Projects</h2>
+
+        <div class="projects-grid">
+
+            <div class="project-card">
+                <img src="Media/Images/Projects/Sim.jpg" alt="F1-Style Steering Wheel" class="project-thumb">
+
+                <h3>F1-Style Racing Simulator</h3>
+                <p>
+                    A fully custom racing wheel with RGB rev lights, button matrix input,
+                    magnetic paddles, and SimHub integration. Designed in Onshape and powered by an Arduino Pro Micro.
+                </p>
+                <a href="portfolio.html" class="project-link">View Details</a>
+            </div>
+
+            <div class="project-card">
+                <img src="Media/Images/Projects/Adder.jpg" alt="F1-Style Steering Wheel" class="project-thumb">
+                <h3>Transistor ALU + Register</h3>
+                <p>
+                    High-resolution force-sensor brake pedal using HX711, fully tuned for low latency.
+                    Built from scratch with metalwork, 3D printing, and embedded code optimization.
+                </p>
+                <a href="portfolio.html" class="project-link">View Details</a>
+            </div>
+
+            <div class="project-card">
+                <img src="Media/Images/Projects/WheelBase.png" alt="F1-Style Steering Wheel" class="project-thumb">
+                <h3>Racing Simulator CAD</h3>
+                <p>
+                    Custom BLE input device using the ESP32 and the BLEGamepad library,
+                    built for smooth analog control and adaptive input mapping.
+                </p>
+                <a href="portfolio.html" class="project-link">View Details</a>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Transcript + Resume Section -->
+    <section class="academic-links">
+        <h2>Academic Documents</h2>
+
+        <div class="doc-links">
+            <a href="transcript.html" class="doc-item">
+                <h3>Transcript</h3>
+                <p>Courses, grades, and academic progress.</p>
+            </a>
+
+            <a href="resume.html" class="doc-item">
+                <h3>Resume</h3>
+                <p>Skills, experience, competitions, and activities.</p>
+            </a>
+        </div>
+    </section>
+    <!-- Photo Catalogue Section -->
+<section class="photo-catalogue">
+    <h2>Photo Catalogue</h2>
+
+    <div class="photo-feed">
+
+        <div class="photo-item">
+            <img src="Media/Images/Showcase/Pedals.png" alt="Caption 1">
+            <p class="caption">These are the pedals I designed in OnShape to work with the racing simulator</p>
+        </div>
+
+        <div class="photo-item">
+            <img src="Media/Images/Showcase/WheelPic.jpg" alt="Caption 2">
+            <p class="caption">This is a picture of what the racing simulator wheel looks like</p>
+        </div>
+
+        <div class="photo-item">
+            <img src="Media/Images/Showcase/CircuitsofWheel.jpg" alt="Caption 3">
+            <p class="caption">This is a picture of the internals of the wheel</p>
+        </div>
+
+        <!-- Add as many photo-item blocks as you want -->
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <h3>Connect with me</h3>
+
+        <div class="footer-links">
+            <a href="mailto:aschacko32@gmail.com">Email</a>
+            <a href="https://github.com/aschacko" target="_blank">GitHub</a>
+            <a href="https://www.instagram.com/ashok_chacko_/" target="_blank">Instagram</a>
+            <a href="https://www.youtube.com/@friendskochi6761/videos" target="_blank">YouTube</a>
+        </div>
+
+        <p class="footer-note">© 2025 Ashok Chacko</p>
+    </footer>
+
+</body>
 </html>

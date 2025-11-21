@@ -1,0 +1,3 @@
+add a small engineering icon (gear outine, waveform, etc)
+add a corner gradient glow that follow scroll
+icons that look like CAD sketches or circuit nodes
