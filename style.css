@@ -498,7 +498,7 @@ section::before {
     text-align: center;
     font-size: 30px;
     margin-bottom: 35px;
-    color: #1f4aff;
+    color: #ffffff;
 }
 
 .photo-feed {
@@ -531,4 +531,106 @@ section::before {
     color: #ffcb05;
     background: #00274c;
     border-top: 1px solid #e1e1e1;
+}
+
+/* -------------------------------
+   Sports Achievements Section
+-------------------------------- */
+
+.achievements-section {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.achievements-section h2 {
+    text-align: center;
+    font-size: 30px;
+    color: #4698e5;
+    margin-bottom: 30px;
+}
+
+.achievements-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.achievement-card {
+    background: #1a1a1e;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1.5px solid #00274c;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.achievement-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+.achievement-card h3 {
+    color: #1f4aff;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.achievement-card p {
+    font-size: 15px;
+    color: #444;
+    line-height: 1.5;
+}
+
+/* -------------------------------
+   Hero Image for Sports Section
+-------------------------------- */
+
+.hero-image {
+    width: 100%;
+    max-height: 500px;
+    overflow: hidden;
+    margin-top: 40px;
+    border-radius: 12px;
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.hero-image img:hover {
+    transform: scale(1.03);
+}
+
+.hero-video {
+    width: 100%;
+    height: 700px; /* adjust height for your hero section */
+    overflow: hidden;
+    border-radius: 12px;
+    position: relative;
+}
+
+.hero-video-player {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* fills container, cropping edges */
+    object-position: center; /* center the crop */
+    display: block;
+}
+.video-caption {
+    position: absolute;
+    bottom: 15px; /* distance from bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    background: #00274c; /* semi-transparent background */
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: center;
 }
