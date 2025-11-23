@@ -1,3 +1,4 @@
+
 /* -----------------------------------------------------
    Global Base
 ----------------------------------------------------- */
@@ -19,7 +20,7 @@ h2 {
 
 body {
     background: #0f0f12;         /* Deep graphite */
-    color: #4698e5;              /* Soft neutral white */
+    color: #9a9aa3;              /* Soft neutral white */
     line-height: 1.6;
 }
 
@@ -633,4 +634,154 @@ section::before {
     border-radius: 8px;
     font-size: 16px;
     text-align: center;
+}
+
+/* ===============================
+   Modal Overlay + Blur
+================================= */
+
+
+body.modal-open {
+    overflow: hidden;
+}
+
+body.modal-open #page-content {
+    filter: blur(6px);
+}
+
+/* Dim background */
+.project-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(6px);
+    z-index: 9999;
+    transition: 0.25s ease-in-out;
+}
+
+.project-modal.hidden {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ===============================
+   Modal Window
+================================= */
+
+.modal-content {
+    background: #00274c;
+    width: 75%;
+    max-width: 850px;
+    border-radius: 14px;
+    padding: 25px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    position: relative;
+    transform: scale(0.95);
+    animation: modalPop 0.25s ease-out forwards;
+}
+
+@keyframes modalPop {
+    to { transform: scale(1); }
+}
+
+/* Close Button */
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    color: rgb(255 0 0 / 74%);
+    transition: 0.2s;
+}
+
+.modal-close:hover {
+    color: #1f4aff;
+}
+
+/* ===============================
+   Modal Left Side (Media)
+================================= */
+
+.modal-media {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-media img,
+.modal-media video {
+    width: 100%;
+    border-radius: 10px;
+    border: 1.5px solid #ffcb05;
+}
+
+/* ===============================
+   Modal Right Side (Text)
+================================= */
+
+.modal-info h2 {
+    margin-bottom: 10px;
+    color: #ffcb05;
+}
+
+.modal-info p {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.modal-info h3 {
+    margin-top: 12px;
+    margin-bottom: 6px;
+    font-size: 18px;
+}
+
+.modal-info ul {
+    list-style: square;
+    padding-left: 20px;
+}
+
+.modal-info ul li {
+    margin-bottom: 6px;
+    font-size: 15px;
+}
+
+/* ===============================
+   RESPONSIVENESS
+================================= */
+
+@media (max-width: 820px) {
+    .modal-content {
+        grid-template-columns: 1fr;
+        width: 88%;
+    }
+
+    .modal-close {
+        top: 6px;
+        right: 14px;
+    }
+}
+
+@media (max-width: 500px) {
+    .modal-content {
+        padding: 18px;
+    }
+
+    .modal-close {
+        font-size: 26px;
+    }
 }

@@ -1,147 +1,568 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Ashok Chacko • Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="Media/Images/Main/chackoLogo.png">
     <link rel="apple-touch-icon" href="Media/Images/Main/chackoLogo.png">
-<link rel="icon" sizes="192x192" href="Media/Images/Main/chackoLogo.png">
-</head>
+    <link rel="icon" sizes="192x192" href="Media/Images/Main/chackoLogo.png">
+    <style>
+        /* ---------- Modal / Carousel styles (kept local so you don't need another CSS edit) ---------- */
 
+        /* Prevent blurring the modal itself by blurring only #page-content when modal-open */
+        body.modal-open {
+            overflow: hidden;
+        }
+        body.modal-open #page-content {
+            filter: blur(6px) saturate(.95);
+            transition: filter 180ms ease;
+            pointer-events: none; /* disable interactions behind modal */
+        }
+
+        /* Modal overlay */
+        .project-modal {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(10,10,12,0.55);
+            backdrop-filter: blur(6px);
+            z-index: 9999;
+            padding: 28px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 180ms ease, visibility 180ms ease;
+        }
+        .project-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Modal window */
+        .modal-content {
+            width: min(1100px, 96%);
+            background: #fff;
+            border-radius: 14px;
+            padding: 18px;
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 18px;
+            box-shadow: 0 18px 50px rgba(10,10,20,0.35);
+            transform: translateY(6px) scale(.99);
+            transition: transform 220ms cubic-bezier(.22,.9,.2,1);
+            max-height: 86vh;
+            overflow: hidden;
+        }
+        .project-modal.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        /* Close */
+        .modal-close {
+            position: absolute;
+            right: 24px;
+            top: 20px;
+            background: transparent;
+            border: none;
+            font-size: 32px;
+            line-height: 1;
+            cursor: pointer;
+            color: #333;
+            padding: 6px 10px;
+        }
+        .modal-close:focus { outline: 2px solid #1f4aff; border-radius: 6px; }
+
+        /* Left: image area */
+        .modal-media {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: stretch;
+            justify-content: flex-start;
+        }
+
+        .image-frame {
+            position: relative;
+            width: 100%;
+            flex: 1 1 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 10px;
+            background: #f3f3f3;
+            border: 1.25px solid #e6e6e6;
+        }
+
+        .image-frame img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            transition: opacity 220ms ease;
+            display: block;
+        }
+
+        /* Arrows */
+        .img-prev, .img-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 28px;
+            background: rgba(0,0,0,0.45);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            user-select: none;
+            border: none;
+        }
+        .img-prev { left: 12px; }
+        .img-next { right: 12px; }
+        .img-prev:focus, .img-next:focus { outline: 2px solid #fff; }
+
+        /* Thumbnails strip */
+        .thumbs {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            overflow-x: auto;
+            padding: 6px 2px;
+        }
+        .thumbs button {
+            border: 2px solid transparent;
+            background: transparent;
+            padding: 0;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .thumbs img {
+            height: 56px;
+            width: auto;
+            display: block;
+            border-radius: 6px;
+            object-fit: cover;
+            border: 2px solid transparent;
+        }
+        .thumbs button.active img {
+            border-color: #1f4aff;
+            box-shadow: 0 4px 12px rgba(31,74,255,0.12);
+        }
+
+        /* Right: info area */
+        .modal-info {
+            padding: 8px 2px;
+            overflow-y: auto;
+        }
+        .modal-info h2 { margin: 6px 0 10px; color: #1f4aff; }
+        .modal-info p { color: #333; line-height: 1.5; margin-bottom: 12px; }
+        .modal-info h3 { margin-top: 8px; font-size: 15px; color: #222; }
+        .modal-info ul { margin-top: 8px; padding-left: 18px; color: #333; }
+        .modal-info .meta { font-size: 14px; color: #666; margin-bottom: 8px; }
+
+        /* responsive */
+        @media (max-width: 980px) {
+            .modal-content { grid-template-columns: 1fr 340px; width: 95%; }
+            .image-frame img { max-height: 60vh; }
+        }
+        @media (max-width: 720px) {
+            .modal-content { grid-template-columns: 1fr; padding: 14px; width: 94%; }
+            .modal-info { order: 2; max-height: 26vh; }
+            .thumbs img { height: 46px; }
+        }
+
+        /* small accessibility + visuals */
+        .sr-only { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+    </style>
+</head>
 <body>
 
-    <!-- Top banner -->
-    <div class="top-intro">
-        <p>Hi, I'm Ashok Chacko - a builder, programmer, and student engineer from Chicago.</p>
-    </div>
-
-    <!-- Header -->
-    <header class="main-header">
-        <div class="title-block">
-            <h1>Ashok Chacko</h1>
-            <p class="subtitle typing-text">Engineering • Computer Science • Passion</p>
-         </div>
-
-        <nav class="main-nav">
-            <a href="index.html">Home</a>
-            <a href="portfolio.html">Projects</a>
-            <a href="transcript.html">Transcript</a>
-            <a href="resume.html">Resume</a>
-            <a href="sports.html">Sports</a>
-        </nav>
-    </header>
-
-    <!-- Intro section -->
-    <section class="about-section">
-    <div class="about-content">
-        <img src="Media/Images/Main/AshokPortrait.jpg" alt="Ashok Chacko Portrait" class="portrait">
-        <div class="about-text">
-            <h2>About My Work</h2>
-            <p>
-               I am a passionate, self-taught engineer. I build projects that I am enthusiastic about using free resources available to me. I’ve done everything from electrical engineering and programming to arts and crafts. I do what makes me happy. This site holds some of the things I’ve built so far and the things I’m learning along the way.
-            </p>
+    <!-- PAGE CONTENT (this will be blurred when modal opens) -->
+    <div id="page-content">
+        <!-- Top banner -->
+        <div class="top-intro">
+            <p>Hi, I'm Ashok Chacko - a builder, programmer, and student engineer from Chicago.</p>
         </div>
-    </div>
-</section>
 
-
-    <!-- Projects Section -->
-    <section class="projects-section">
-        <h2>Featured Projects</h2>
-
-        <div class="projects-grid">
-
-            <div class="project-card">
-                <img src="Media/Images/Projects/Sim.jpg" alt="F1-Style Steering Wheel" class="project-thumb">
-
-                <h3>F1-Style Racing Simulator</h3>
-                <p>
-                    A fully custom racing wheel with RGB rev lights, button matrix input,
-                    magnetic paddles, and SimHub integration. Designed in Onshape and powered by an Arduino Pro Micro.
-                </p>
-                <a href="portfolio.html" class="project-link">View Details</a>
+        <!-- Header -->
+        <header class="main-header">
+            <div class="title-block">
+                <h1>Ashok Chacko</h1>
+                <p class="subtitle typing-text">Engineering • Computer Science • Passion</p>
             </div>
 
-            <div class="project-card">
-                <img src="Media/Images/Projects/Adder.jpg" alt="F1-Style Steering Wheel" class="project-thumb">
-                <h3>Transistor ALU + Register</h3>
-                <p>
-                    High-resolution force-sensor brake pedal using HX711, fully tuned for low latency.
-                    Built from scratch with metalwork, 3D printing, and embedded code optimization.
-                </p>
-                <a href="portfolio.html" class="project-link">View Details</a>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="portfolio.html">Projects</a>
+                <a href="transcript.html">Transcript</a>
+                <a href="resume.html">Resume</a>
+                <a href="sports.html">Sports</a>
+            </nav>
+        </header>
+
+        <!-- Intro section -->
+        <section class="about-section">
+            <div class="about-content">
+                <img src="Media/Images/Main/AshokPortrait.jpg" alt="Ashok Chacko Portrait" class="portrait">
+                <div class="about-text">
+                    <h2>About My Work</h2>
+                    <p>
+                        I am a passionate, self-taught engineer. I build projects that I am enthusiastic about using free resources available to me. I’ve done everything from electrical engineering and programming to arts and crafts. I do what makes me happy. This site holds some of the things I’ve built so far and the things I’m learning along the way.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="projects-section">
+            <h2>Featured Projects</h2>
+
+            <div class="projects-grid">
+
+                <div class="project-card">
+                    <img src="Media/Images/Projects/Sim.jpg" alt="F1-Style Steering Wheel" class="project-thumb">
+                    <h3>F1-Style Racing Simulator</h3>
+                    <p>
+                        A fully custom racing wheel with RGB rev lights, button matrix input,
+                        magnetic paddles, and SimHub integration. Designed in Onshape and powered by an Arduino Pro Micro.
+                    </p>
+                    <a href="#" class="project-link">View Details</a>
+                </div>
+
+                <div class="project-card">
+                    <img src="Media/Images/Projects/Adder.jpg" alt="Transistor ALU + Register" class="project-thumb">
+                    <h3>Transistor ALU + Register</h3>
+                    <p>
+                        A discrete transistor-based ALU and register system demonstrating digital logic fundamentals.
+                    </p>
+                    <a href="#" class="project-link">View Details</a>
+                </div>
+
+                <div class="project-card">
+                    <img src="Media/Images/Projects/WheelBase.png" alt="Racing Simulator CAD" class="project-thumb">
+                    <h3>Racing Simulator CAD</h3>
+                    <p>
+                        Mechanical CAD assembly and design files for my racing simulator components.
+                    </p>
+                    <a href="#" class="project-link">View Details</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Transcript + Resume Section -->
+        <section class="academic-links">
+            <h2>Academic Documents</h2>
+
+            <div class="doc-links">
+                <a href="transcript.html" class="doc-item">
+                    <h3>Transcript</h3>
+                    <p>Courses, grades, and academic progress.</p>
+                </a>
+
+                <a href="resume.html" class="doc-item">
+                    <h3>Resume</h3>
+                    <p>Skills, experience, competitions, and activities.</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- Photo Catalogue Section -->
+        <section class="photo-catalogue">
+            <h2>Photo Catalogue</h2>
+
+            <div class="photo-feed">
+
+                <div class="photo-item">
+                    <img src="Media/Images/Showcase/Pedals.png" alt="Caption 1">
+                    <p class="caption">These are the pedals I designed in OnShape to work with the racing simulator</p>
+                </div>
+
+                <div class="photo-item">
+                    <img src="Media/Images/Showcase/WheelPic.jpg" alt="Caption 2">
+                    <p class="caption">This is a picture of what the racing simulator wheel looks like</p>
+                </div>
+
+                <div class="photo-item">
+                    <img src="Media/Images/Showcase/CircuitsofWheel.jpg" alt="Caption 3">
+                    <p class="caption">This is a picture of the internals of the wheel</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <h3>Connect with me</h3>
+
+            <div class="footer-links">
+                <a href="mailto:aschacko32@gmail.com">Email</a>
+                <a href="https://github.com/aschacko" target="_blank">GitHub</a>
+                <a href="https://www.instagram.com/ashok_chacko_/" target="_blank">Instagram</a>
+                <a href="https://www.youtube.com/@friendskochi6761/videos" target="_blank">YouTube</a>
             </div>
 
-            <div class="project-card">
-                <img src="Media/Images/Projects/WheelBase.png" alt="F1-Style Steering Wheel" class="project-thumb">
-                <h3>Racing Simulator CAD</h3>
-                <p>
-                    Custom BLE input device using the ESP32 and the BLEGamepad library,
-                    built for smooth analog control and adaptive input mapping.
-                </p>
-                <a href="portfolio.html" class="project-link">View Details</a>
+            <p class="footer-note">© 2025 Ashok Chacko</p>
+        </footer>
+    </div> <!-- END #page-content -->
+
+    <!-- PROJECT MODAL (keeps outside of #page-content so it remains clear) -->
+    <div id="project-modal" class="project-modal" role="dialog" aria-hidden="true" aria-labelledby="modal-title" aria-modal="true">
+        <div class="modal-content" role="document">
+            <button class="modal-close" aria-label="Close project preview">&times;</button>
+
+            <div class="modal-media" aria-hidden="false">
+                <div class="image-frame" id="image-frame">
+                    <button class="img-prev" aria-label="Previous image">&#10094;</button>
+                    <img id="modal-image" src="" alt="">
+                    <button class="img-next" aria-label="Next image">&#10095;</button>
+                </div>
+                <div class="thumbs" id="thumbs" aria-label="Project thumbnails" role="list"></div>
             </div>
 
+            <div class="modal-info">
+                <h2 id="modal-title"></h2>
+                <div class="meta" id="modal-meta"></div>
+                <p id="modal-description"></p>
+
+                <h3>Key Skills Used</h3>
+                <ul id="modal-skills"></ul>
+
+                <h3>Project Links</h3>
+                <div id="modal-links"></div>
+            </div>
         </div>
-    </section>
-
-
-    <!-- Transcript + Resume Section -->
-    <section class="academic-links">
-        <h2>Academic Documents</h2>
-
-        <div class="doc-links">
-            <a href="transcript.html" class="doc-item">
-                <h3>Transcript</h3>
-                <p>Courses, grades, and academic progress.</p>
-            </a>
-
-            <a href="resume.html" class="doc-item">
-                <h3>Resume</h3>
-                <p>Skills, experience, competitions, and activities.</p>
-            </a>
-        </div>
-    </section>
-    <!-- Photo Catalogue Section -->
-<section class="photo-catalogue">
-    <h2>Photo Catalogue</h2>
-
-    <div class="photo-feed">
-
-        <div class="photo-item">
-            <img src="Media/Images/Showcase/Pedals.png" alt="Caption 1">
-            <p class="caption">These are the pedals I designed in OnShape to work with the racing simulator</p>
-        </div>
-
-        <div class="photo-item">
-            <img src="Media/Images/Showcase/WheelPic.jpg" alt="Caption 2">
-            <p class="caption">This is a picture of what the racing simulator wheel looks like</p>
-        </div>
-
-        <div class="photo-item">
-            <img src="Media/Images/Showcase/CircuitsofWheel.jpg" alt="Caption 3">
-            <p class="caption">This is a picture of the internals of the wheel</p>
-        </div>
-
-        <!-- Add as many photo-item blocks as you want -->
     </div>
-</section>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-        <h3>Connect with me</h3>
+    <script>
+    /*******************************
+     * Enhanced Modal + Carousel
+     *******************************/
 
-        <div class="footer-links">
-            <a href="mailto:aschacko32@gmail.com">Email</a>
-            <a href="https://github.com/aschacko" target="_blank">GitHub</a>
-            <a href="https://www.instagram.com/ashok_chacko_/" target="_blank">Instagram</a>
-            <a href="https://www.youtube.com/@friendskochi6761/videos" target="_blank">YouTube</a>
-        </div>
+    // Elements
+    const modal = document.getElementById('project-modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDesc = document.getElementById('modal-description');
+    const modalSkills = document.getElementById('modal-skills');
+    const modalMeta = document.getElementById('modal-meta');
+    const modalLinks = document.getElementById('modal-links');
+    const thumbs = document.getElementById('thumbs');
+    const btnPrev = document.querySelector('.img-prev');
+    const btnNext = document.querySelector('.img-next');
+    const btnClose = document.querySelector('.modal-close');
+    const pageContent = document.getElementById('page-content');
+    const imageFrame = document.getElementById('image-frame');
 
-        <p class="footer-note">© 2025 Ashok Chacko</p>
-    </footer>
+    // State
+    let currentImages = [];
+    let currentIndex = 0;
+    let currentTitle = '';
+    let touchStartX = 0;
+    let touchEndX = 0;
 
+    // Project data - add images as arrays; extend images list for each project
+    const projectData = {
+        'F1-Style Racing Simulator': {
+            images: [
+                'Media/Images/Projects/Sim.jpg',
+                'Media/Images/Projects/Sim2.jpg',
+                'Media/Images/Projects/Sim3.jpg'
+            ],
+            description: 'A fully custom racing wheel with RGB rev lights, button matrix input, magnetic paddles, and SimHub integration. Designed in Onshape and powered by an Arduino Pro Micro.',
+            skills: ['Onshape CAD', 'Arduino Pro Micro', 'Embedded Systems', 'RGB LED Control', 'SimHub Integration'],
+            links: [{ label: 'Repository', url: 'https://github.com/aschacko' }]
+        },
+        'Transistor ALU + Register': {
+            images: [
+                'Media/Images/Projects/Adder.jpg',
+                'Media/Images/Projects/Adder2.jpg'
+            ],
+            description: 'A discrete transistor-based ALU and register system demonstrating digital logic fundamentals.',
+            skills: ['Digital Logic Design', 'Transistor Circuits', 'Soldering', 'PCB Layout'],
+            links: []
+        },
+        'Racing Simulator CAD': {
+            images: [
+                'Media/Images/Projects/WheelBase.png',
+                'Media/Images/Projects/WheelBase2.png'
+            ],
+            description: 'Mechanical CAD assembly and design files for my racing simulator components.',
+            skills: ['Mechanical CAD', 'FEM Analysis', '3D Modeling'],
+            links: []
+        }
+    };
+
+    // Utility: preload images
+    function preloadImages(arr) {
+        arr.forEach(src => {
+            const i = new Image();
+            i.src = src;
+        });
+    }
+
+    // Render thumbnail strip
+    function renderThumbs(images) {
+        thumbs.innerHTML = '';
+        images.forEach((src, idx) => {
+            const btn = document.createElement('button');
+            btn.setAttribute('role','listitem');
+            btn.classList.toggle('active', idx === currentIndex);
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = `Thumbnail ${idx + 1}`;
+            btn.appendChild(img);
+            btn.addEventListener('click', () => {
+                currentIndex = idx;
+                updateImage();
+            });
+            thumbs.appendChild(btn);
+        });
+    }
+
+    // Update displayed image and active thumbnail
+    function updateImage() {
+        if (!currentImages.length) return;
+        // handle index bounds
+        currentIndex = ((currentIndex % currentImages.length) + currentImages.length) % currentImages.length;
+        // fade effect
+        modalImage.style.opacity = '0';
+        setTimeout(() => {
+            modalImage.src = currentImages[currentIndex];
+            modalImage.alt = `${currentTitle} — image ${currentIndex + 1}`;
+            // highlight active thumb
+            const buttons = Array.from(thumbs.children);
+            buttons.forEach((b, i) => b.classList.toggle('active', i === currentIndex));
+            // ensure visible in scroll
+            if (buttons[currentIndex]) buttons[currentIndex].scrollIntoView({ inline: 'center', behavior: 'smooth', block: 'nearest' });
+            modalImage.style.opacity = '1';
+        }, 160);
+    }
+
+    // Open modal with project
+    function openModal(title) {
+        const data = projectData[title];
+        if (!data) return;
+        currentTitle = title;
+        currentImages = data.images.slice();
+        currentIndex = 0;
+
+        // populate content
+        modalTitle.textContent = title;
+        modalDesc.textContent = data.description || '';
+        modalSkills.innerHTML = (data.skills || []).map(s => `<li>${s}</li>`).join('');
+        modalMeta.textContent = ''; // optional extra meta
+        modalLinks.innerHTML = (data.links || []).map(l => `<a href="${l.url}" target="_blank" rel="noopener noreferrer">${l.label}</a>`).join(' ');
+
+        // preload
+        preloadImages(currentImages);
+        renderThumbs(currentImages);
+        updateImage();
+
+        // show
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden','false');
+        document.body.classList.add('modal-open');
+
+        // focus management
+        btnClose.focus();
+        // trap focus lightly (simple)
+        document.addEventListener('focus', trapFocus, true);
+    }
+
+    // Close modal
+    function closeModal() {
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden','true');
+        document.body.classList.remove('modal-open');
+        // return focus
+        document.removeEventListener('focus', trapFocus, true);
+    }
+
+    // Simple focus trap so keyboard users stay in modal while open
+    function trapFocus(e) {
+        if (!modal.contains(e.target)) {
+            e.stopPropagation();
+            btnClose.focus();
+        }
+    }
+
+    // Event listeners for project cards
+    document.querySelectorAll('.project-card').forEach(card => {
+        const btn = card.querySelector('.project-link');
+        btn.addEventListener('click', (ev) => {
+            ev.preventDefault();
+            const title = card.querySelector('h3').innerText.trim();
+            openModal(title);
+        });
+    });
+
+    // Arrow buttons
+    btnNext.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex + 1) % currentImages.length;
+        updateImage();
+    });
+    btnPrev.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+        updateImage();
+    });
+
+    // Close controls
+    btnClose.addEventListener('click', closeModal);
+    // click outside to close
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    // keyboard navigation: Esc close; left/right images
+    window.addEventListener('keydown', (e) => {
+        if (modal.classList.contains('active')) {
+            if (e.key === 'Escape') {
+                closeModal();
+            } else if (e.key === 'ArrowRight') {
+                currentIndex = (currentIndex + 1) % currentImages.length;
+                updateImage();
+            } else if (e.key === 'ArrowLeft') {
+                currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+                updateImage();
+            }
+        }
+    });
+
+    // Touch swipe support on imageFrame
+    imageFrame.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].clientX;
+    }, {passive:true});
+    imageFrame.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].clientX;
+        const diff = touchEndX - touchStartX;
+        const threshold = 40; // px
+        if (Math.abs(diff) > threshold) {
+            if (diff < 0) { // swipe left -> next
+                currentIndex = (currentIndex + 1) % currentImages.length;
+            } else { // swipe right -> prev
+                currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+            }
+            updateImage();
+        }
+    }, {passive:true});
+
+    // Prevent background scrolling by touch on mobile when modal is open
+    modal.addEventListener('touchmove', (e) => {
+        if (document.body.classList.contains('modal-open')) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+
+    // Ensure modal is hidden on load
+    document.addEventListener('DOMContentLoaded', () => {
+        modal.setAttribute('aria-hidden','true');
+    });
+    </script>
 </body>
 </html>
