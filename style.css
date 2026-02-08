@@ -1,9 +1,9 @@
-
 /* -----------------------------------------------------
    Global Base
 ----------------------------------------------------- */
 
-p, li {
+p,
+li {
     letter-spacing: 0.2px;
 }
 
@@ -19,17 +19,23 @@ h2 {
 }
 
 body {
-    background: #0f0f12;         /* Deep graphite */
-    color: #9a9aa3;              /* Soft neutral white */
+    background: #0f0f12;
+    /* Deep graphite */
+    color: #9a9aa3;
+    /* Soft neutral white */
     line-height: 1.6;
 }
 
 /* Accent colors */
 :root {
-    --accent: #4698e5;           /* Michigan Blue */
-    --accent-bright: #FFCB05;    /* Michigan Maize */
-    --surface: #1a1a1e;          /* Card surface */
-    --border: #2c2c32;           /* Subtle border */
+    --accent: #4698e5;
+    /* Michigan Blue */
+    --accent-bright: #FFCB05;
+    /* Michigan Maize */
+    --surface: #1a1a1e;
+    /* Card surface */
+    --border: #2c2c32;
+    /* Subtle border */
 }
 
 
@@ -59,6 +65,12 @@ body {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
 }
 
 .title-block h1 {
@@ -91,6 +103,7 @@ body {
         margin-top: 12px;
         width: 100%;
     }
+
     .main-nav a {
         margin-left: 0;
         margin-right: 12px;
@@ -148,14 +161,15 @@ body {
     padding: 22px;
     border-radius: 12px;
     border: 1.5px solid var(--border);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
     transition: 0.25s ease;
 }
 
 .project-card:hover {
     transform: translateY(-4px);
     border-color: var(--accent);
-    box-shadow: 0 0 16px rgba(0,39,76,0.25); /* Michigan Blue shadow */
+    box-shadow: 0 0 16px rgba(0, 39, 76, 0.25);
+    /* Michigan Blue shadow */
 }
 
 .project-card h3 {
@@ -217,7 +231,7 @@ body {
 
 .doc-item:hover {
     border-color: var(--accent);
-    box-shadow: 0 0 14px rgba(0,39,76,0.25);
+    box-shadow: 0 0 14px rgba(0, 39, 76, 0.25);
 }
 
 .doc-item h3 {
@@ -256,7 +270,9 @@ body {
 }
 
 @keyframes fadeIn {
-    to { opacity: 1; }
+    to {
+        opacity: 1;
+    }
 }
 
 
@@ -267,6 +283,7 @@ body {
 .doc-item {
     transform: translateY(0);
 }
+
 html {
     scroll-behavior: smooth;
 }
@@ -356,7 +373,7 @@ a {
     border: 1.5px solid var(--border);
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 0 14px rgba(0,39,76,0.2);
+    box-shadow: 0 0 14px rgba(0, 39, 76, 0.2);
 }
 
 .pdf-container iframe {
@@ -364,6 +381,7 @@ a {
     height: 100%;
     border: none;
 }
+
 /* -----------------------------------------------------
    Resume PDF Viewer
 ----------------------------------------------------- */
@@ -403,16 +421,19 @@ a {
     align-items: center;
     justify-content: center;
     gap: 1.5rem;
-    flex-wrap: wrap; /* For small screens */
+    flex-wrap: wrap;
+    /* For small screens */
 }
 
 .portrait {
     width: 150px;
     height: 150px;
-    border-radius: 50%; /* circular portrait */
+    border-radius: 50%;
+    /* circular portrait */
     object-fit: cover;
-    border: 3px solid var(--accent); /* Michigan Blue */
-    box-shadow: 0px 3px 6px rgba(0,0,0,0.1);
+    border: 3px solid var(--accent);
+    /* Michigan Blue */
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
 }
 
@@ -421,7 +442,8 @@ a {
 }
 
 section:hover {
-    background-color: rgba(0,39,76,0.12); /* subtle blue tint */
+    background-color: rgba(0, 39, 76, 0.12);
+    /* subtle blue tint */
 }
 
 /* Subtle backdrop effect for sections */
@@ -433,15 +455,16 @@ section {
 
 /* Alternating subtle colors for each section */
 .about-section {
-    background-color: rgba(0,39,76,0.05); /* very light Michigan blue */
+    background-color: rgba(0, 39, 76, 0.05);
+    /* very light Michigan blue */
 }
 
 .projects-section {
-    background-color: rgba(0,39,76,0.05);
+    background-color: rgba(0, 39, 76, 0.05);
 }
 
 .academic-links {
-    background-color: rgba(0,39,76,0.08);
+    background-color: rgba(0, 39, 76, 0.08);
 }
 
 /* Optional: subtle overlay effect for depth */
@@ -478,13 +501,21 @@ section::before {
 }
 
 @keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
 }
 
 @keyframes blink {
-    50% { border-color: transparent; }
+    50% {
+        border-color: transparent;
+    }
 }
+
 /* -------------------------------
    Photo Catalogue
 -------------------------------- */
@@ -513,7 +544,7 @@ section::before {
     border: 1.5px solid #00274c;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     transition: 0.25s;
 }
 
@@ -562,13 +593,13 @@ section::before {
     padding: 20px;
     border-radius: 10px;
     border: 1.5px solid #00274c;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .achievement-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
 .achievement-card h3 {
@@ -610,7 +641,8 @@ section::before {
 
 .hero-video {
     width: 100%;
-    height: 700px; /* adjust height for your hero section */
+    height: 700px;
+    /* adjust height for your hero section */
     overflow: hidden;
     border-radius: 12px;
     position: relative;
@@ -619,16 +651,21 @@ section::before {
 .hero-video-player {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* fills container, cropping edges */
-    object-position: center; /* center the crop */
+    object-fit: cover;
+    /* fills container, cropping edges */
+    object-position: center;
+    /* center the crop */
     display: block;
 }
+
 .video-caption {
     position: absolute;
-    bottom: 15px; /* distance from bottom */
+    bottom: 15px;
+    /* distance from bottom */
     left: 50%;
     transform: translateX(-50%);
-    background: #00274c; /* semi-transparent background */
+    background: #00274c;
+    /* semi-transparent background */
     color: white;
     padding: 8px 15px;
     border-radius: 8px;
@@ -656,7 +693,7 @@ body.modal-open #page-content {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.55);
+    background: rgba(0, 0, 0, 0.55);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -681,7 +718,7 @@ body.modal-open #page-content {
     max-width: 850px;
     border-radius: 14px;
     padding: 25px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 22px;
@@ -691,7 +728,9 @@ body.modal-open #page-content {
 }
 
 @keyframes modalPop {
-    to { transform: scale(1); }
+    to {
+        transform: scale(1);
+    }
 }
 
 /* Close Button */
@@ -791,7 +830,7 @@ body.modal-open #page-content {
     top: 12px;
     right: 12px;
     font-size: 24px;
-    background: rgba(0,0,0,0.45);
+    background: rgba(0, 0, 0, 0.45);
     color: #ffffff;
     border: none;
     padding: 6px 10px;
@@ -802,7 +841,25 @@ body.modal-open #page-content {
 }
 
 .fullscreen-btn:hover {
-    background: rgba(0,0,0,0.8);
+    background: rgba(0, 0, 0, 0.8);
     transform: scale(1.1);
 }
 
+.project-card {
+    position: relative;
+    overflow: hidden;
+}
+
+/* A subtle blue glow that appears on hover */
+.project-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, rgba(70, 152, 229, 0.15) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.project-card:hover::before {
+    opacity: 1;
+}
