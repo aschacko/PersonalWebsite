@@ -297,7 +297,7 @@
             </video>
             <!-- Hero Video Section with Caption -->
 
-            <div class="video-caption">Me driving around the Monaco Track</div>
+            <div class="video-caption">Me driving around the Monaco Track in my Racing Simulator</div>
 
         </section>
 
@@ -319,9 +319,8 @@
                     <img src="Media/Images/Projects/Sim.jpg" alt="F1-Style Steering Wheel" class="project-thumb">
                     <h3>F1-Style Racing Simulator</h3>
                     <p>
-                        A fully custom racing wheel with RGB rev lights, button matrix input,
-                        magnetic paddles, and SimHub integration. Designed in Onshape and powered by an Arduino Pro
-                        Micro.
+                        
+                        
                     </p>
                     <a href="#" class="project-link">View Details</a>
                 </div>
@@ -477,7 +476,23 @@
                     'Media/Images/Projects/sim2.jpg',
                     'Media/Images/Projects/sim3.jpg'
                 ],
-                description: 'A fully custom racing wheel with RGB rev lights, button matrix input, magnetic paddles, and SimHub integration. Designed in Onshape and powered by an Arduino Pro Micro.',
+                description: ` This is a fully custom racing simulator built from the ground up. It includes a 12 newton meter wheelbase
+                        built from a salvaged hoverboard motor, custom pedals, multiple different steering wheels 
+                        and a custom racing cockpit to mount everything together.
+                        The off the shelf equivalent consumer products are priced as follows, $500 for the wheelbase, $650 for the steering
+                        wheel, $500 for the racing cockpit, and $300 for the pedals.
+                        The exorbitantly off-putting prices are originally what inspired me to make this product. I have always loved racing, 
+                        yet these prices filter out the underprivileged.  
+                        My engineered solution cost only $150 for the wheelbase and $100 for the f1-styled steering wheel. 
+                        This incredibly competitive pricepoint allowed me to market and sell 3 of these units, allowing others
+                        to participate in a hobby typically reserved for the wealthy.
+
+                        The wheelbase uses FFBeast to interface with the computer and the STM microcontroller. Using an old hoverboard
+                        motor, I was able to cheaply source a powerful motor for realistic feedback. Matched with a PID controlling software 
+                        I was able to process encoder movements to desired motor outputs. PID stands for proportional integral derivative and 
+                        its an algorithim that uses heavy calculus to use position feedback to map motor movements. The enclosure for the 
+                        wheelbase was designed on my own in OnShape and required many hours to determine the most structurally sound design
+                        while minimizing cost.`,
                 skills: ['Onshape CAD', 'Arduino Pro Micro', 'Embedded Systems', 'RGB LED Control', 'SimHub Integration'],
                 links: [{ label: 'Repository', url: 'https://github.com/aschacko' }]
             },
@@ -546,7 +561,7 @@
                 modalImage.style.opacity = '1';
             }, 160);
         }
-
+        
         // Open modal with project
         function openModal(title) {
             const data = projectData[title];
@@ -681,6 +696,8 @@
                 }
             });
         });
+        
+        
     </script>
 </body>
 
